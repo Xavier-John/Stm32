@@ -1521,7 +1521,7 @@ static void MX_GPIO_Init(void)
  80009e2:	f042 0210 	orr.w	r2, r2, #16
  80009e6:	619a      	str	r2, [r3, #24]
  80009e8:	699a      	ldr	r2, [r3, #24]
-	  HAL_GPIO_TogglePin(LED_GPIO_Port,LED_GPIO_Port);
+	  HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
  80009ea:	4c15      	ldr	r4, [pc, #84]	; (8000a40 <main+0x7c>)
   __HAL_RCC_GPIOC_CLK_ENABLE();
  80009ec:	f002 0210 	and.w	r2, r2, #16
@@ -1560,9 +1560,9 @@ static void MX_GPIO_Init(void)
  8000a20:	9305      	str	r3, [sp, #20]
   HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
  8000a22:	f7ff fc49 	bl	80002b8 <HAL_GPIO_Init>
-	  HAL_GPIO_TogglePin(LED_GPIO_Port,LED_GPIO_Port);
+	  HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
  8000a26:	4620      	mov	r0, r4
- 8000a28:	f44f 5180 	mov.w	r1, #4096	; 0x1000
+ 8000a28:	f44f 5100 	mov.w	r1, #8192	; 0x2000
  8000a2c:	f7ff fd29 	bl	8000482 <HAL_GPIO_TogglePin>
 	  HAL_Delay(1000);
  8000a30:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
