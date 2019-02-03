@@ -40,6 +40,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <stdio.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -108,7 +109,9 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  uint i=0;
+  uint j=0;
+  char text = "hello";
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -116,8 +119,23 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-	  HAL_Delay(1000);
+//	  HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+//	  printf(text);
+//	  i++;
+//	  ITM_SendChar( 65 );
+//	  HAL_Delay(100);
+
+	  if (HAL_GPIO_ReadPin(TEST_INPUT_PORT,TEST_INPUT))
+	  {
+		  HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_RESET);
+		  j++;
+	  }
+	  else if (!(HAL_GPIO_ReadPin(TEST_INPUT_PORT,TEST_INPUT)))
+	  {
+		  HAL_GPIO_WritePin(LED_GPIO_Port,LED_Pin,GPIO_PIN_SET);
+		  i++;
+
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -180,6 +198,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
 
+  GPIO_InitStruct.Pin = TEST_INPUT;
+   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+   GPIO_InitStruct.Pull = GPIO_PULLUP;
+   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+   HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
 }
 
 /* USER CODE BEGIN 4 */
